@@ -1,10 +1,11 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <cstdlib>
 
 using namespace std;
 
-void addExpence(vector<double>& expence, vector<string>& names){
+void addExpence(vector<double>& expence, vector<string>& names, double budget){
     string name;
     double price;
 
@@ -14,8 +15,15 @@ void addExpence(vector<double>& expence, vector<string>& names){
     cout << "sum expences: \n";
     cin >> price;
 
-    names.push_back(name);
-    expence.push_back(price);
+     if(price > budget){
+        cout << "Error! Budget exceeded!\n";
+        exit(1);
+    }
+    else{
+         names.push_back(name);
+         expence.push_back(price);
+    }
+   
 }
 double calculateExpences(const vector<double>& expence){
     double sum = 0;
@@ -34,8 +42,8 @@ double findMostExpensive(vector<double>& expence){
     return mostExpence;
 }
 void showBalance(double budget, const vector<double>& expence){
-    double total = calculateExpences(expence);
-    double balance = budget - total;
+    double totalExpence = calculateExpences(expence);
+    double balance = budget - totalExpence;
 
     cout << "balance: " << balance << "\n";
 }
@@ -47,15 +55,22 @@ int main(){
     cout << "==Expence Tracker==\n" << "\n";
     cout << "==Enter Your Budget==\n";
     cin >> budget;
+
     while(true){
         cout << "\nWhat do you want to do?\n";
-        cout << "Add expense(1), Calculate all expenses(2), Find the most expensive expense(3), View remaining money(4)\n";
+        
+        cout << "==Add expense==\n";
+        cout << "==Calculate All Expenses==\n";
+        cout << "==Find The most Expensive expense==\n";
+        cout << "==View Remaining Money==\n";
+        cout << "==Close==\n";
+        
         int operation;
         cin >> operation;
         
         switch(operation){
             case 1:
-            addExpence(expence, names);
+            addExpence(expence, names, budget);
             break;
             case 2:
             cout << "==Total costs==\n"
@@ -72,6 +87,9 @@ int main(){
             case 4:
             showBalance(budget, expence);
             break;
+            case 5:
+            cout << "Program is closing..\n";
+            return 0;
 
             default:
                 cout << "Invalid Command\n";
