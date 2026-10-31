@@ -88,6 +88,13 @@ void addMoney(double& budget){
     cout << "Succesfully added!\n";
 }
 
+void expenseHistory(vector<double>& expence, vector<string>& names){
+    cout << "==Expense History==\n";
+    for(int v = 0; v < names.size(); v++){
+        cout << v + 1 << ". " << names[v] << " - " << expence[v] << "\n";
+    }
+}
+
 int main(){
     vector<double> expence;
     vector<string> names;
@@ -105,7 +112,9 @@ int main(){
         cout << "==(4)Find The most Expensive expense==\n";
         cout << "==(5)View Remaining Money==\n";
         cout << "==(6)Remove Expense==\n";
-        cout << "==(7)Close==\n";
+        cout << "==(7)Expense History==\n";
+        
+        cout << "==(8)Close==\n";
         
         int operation;
         cin >> operation;
@@ -114,13 +123,16 @@ int main(){
             case 1:
             addExpence(expence, names, budget);
             break;
+
             case 2:
             addMoney(budget);
             break;
+
             case 3:
             cout << "==Total costs==\n"
             << calculateExpences(expence) << "\n";
             break;
+
             case 4:
             if(expence.empty()){
                 cout << "==There are no expenses yet==\n";
@@ -130,13 +142,20 @@ int main(){
                 findMostExpensive(expence, names); 
             }
             break;
+
             case 5:
             showBalance(budget, expence);
             break;
+
             case 6:
             removeExpence(expence, names);
             break;
+
             case 7:
+            expenseHistory(expence, names);
+            break;
+
+            case 8:
             cout << "Program is closing..\n";
             return 0;
 
