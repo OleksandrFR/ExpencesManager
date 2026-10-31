@@ -82,9 +82,8 @@ void removeExpence(vector<double>& expence, vector<string>& names){
 
 void addMoney(double& budget){
     double addBudget;
-    
     cout << "Enter the amount you want to add: \n";
-    cin >> budget;
+    cin >> addBudget;
     budget += addBudget;
     cout << "Succesfully added!\n";
 }
